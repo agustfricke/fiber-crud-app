@@ -1,0 +1,21 @@
+<div>
+    {{ if .Tasks }}
+        {{ range .Tasks }}
+        <div>
+            <p>{{ .Body }}</p>
+            {{ if .Completed }}
+                <p>Compltada</p>
+            {{ else }}
+                <p>No compltada</p>
+            {{ end }}
+            <a href="/task/{{ .ID }}/">See task</a>
+
+        </div>
+        {{ end }}
+    {{ else }}
+        <div>
+            <p>No tasks yet.</p>
+            <p><a href="/add">Add new</a></p>
+        </div>
+    {{ end }}
+</div>

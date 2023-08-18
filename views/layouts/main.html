@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+
+<head>
+
+    <title>Fiber crud app</title>
+    <link rel="stylesheet" href="styles/main.css?v=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+<body>
+{{template "header" .}}
+    <div>
+        <h1>{{.Body}}</h1>
+        <h2>
+            {{.Completed}}
+        </h2>
+        {{embed}}
+    </div>
+</body>
+<script src="/javascript/main.js"></script>
+<script>
+    const timeStamp = Date.now()
+    const stylesheetLink = document.querySelector("link#styles")
+    const appScriptLink = document.querySelector("script#main")
+    stylesheetLink.href += `?t=${timeStamp}`
+    appScriptLink.src += `?t=${timeStamp}`
+</script>
+</html>

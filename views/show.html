@@ -1,0 +1,35 @@
+<div>
+    {{if .Task}}
+
+    <div>
+        <p>{{ .Task.Body }}</p>
+        <p>{{ .Task.Completed }}</p>
+    </div>
+    
+    <div>
+        <a href="/task/{{ .Task.ID }}/edit">Edit</a>
+        <button id="delete-button" data-taskid="{{ .Fact.ID }}">Delete</button>
+    </div>
+    {{end}}
+</div>
+
+<script>
+const deleteButton = document.querySelector('#delete-button')
+const taskToDelete = deleteButton && deleteButton.dataset.taskid
+
+// Add event listener to listen for button click
+deleteButton && deleteButton.addEventListener('click', () => {
+	// We ask the user if they are sure they want to delete the fact
+    const result = confirm("Are you sure you want to delete this fact?")
+    
+	// If the user cancels the prompt, we exit here
+    if (!result) return
+
+    // If the user confirms that they want to delete, we send a DELETE request
+    // URL uses the current fact's ID
+    // Lastly, we redirect to index
+    return fetch(`/task/${taskToDelete}`, { method: 'DELETE' })
+            .then(() => document.location.href="/")
+
+})
+</script>

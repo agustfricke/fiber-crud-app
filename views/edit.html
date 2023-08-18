@@ -1,0 +1,50 @@
+<div>
+    <form id="form-update-task" data-taskid="{{ .Task.ID }}">
+        <label for="body">
+            <span>Body</span>
+            <input type="text" value="{{ .Task.Body }}" name="body">
+        </label>
+
+        <label for="completed">
+            <span>Completed</span>
+            <input type="checkbox" {{ if .Task.Completed }}checked{{ end }} name="completed">
+        </label>
+
+        <input type="submit" value="Update">
+    </form>
+</div>
+
+<script>
+const editForm = document.querySelector('#form-update-task');
+const taskToEdit = editForm && editForm.dataset.taskid;
+
+editForm && editForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const bodyValue = editForm.querySelector('[name="body"]').value;
+    const completedValue = editForm.querySelector('[name="completed"]').checked;
+
+    const requestData = {
+        body: bodyValue,
+        completed: completedValue,
+    };
+
+    try {
+        const response = await fetch(`/task/${taskToEdit}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        });
+
+        if (response.ok) {
+            document.location.href = `/task/${taskToEdit}`; // Redirect to show
+        } else {
+            console.error('Error updating task:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+</script>
