@@ -1,17 +1,19 @@
+## CRUD WEB APP CON FIBER Y DOCKER
 
-- run container
-    docker compose up
+### Instalar y usar
 
-- re build container
-    docker compose build
+- para hacerlo mas practico y no tener errores con VCS, vamos a eliminar el folder .git
+- les dejo los archivo .env y .air.toml ya listos pero es de buena practica no subirlos a GitHub
 
-- enter to container:
-    docker compose run --service-ports web bash
+```bash
+git clone https://github.com/agustfricke/fiber-crud-app.git
+cd fiber-crud-app
+sudo rm -r .git
+```
 
-- run go
-    go run cmd/main.go -b 0.0.0.0
+```bash
+sudo docker compose build
+sudo docker compose up
+```
 
-- example for .env in .example.env
-
-- Air config example in .example.air.toml
 
